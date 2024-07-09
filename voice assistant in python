@@ -1,1 +1,49 @@
 
+#include <iostream>
+#include <string>
+#include <algorithm> // Include the <algorithm> header for 'transform' function
+
+// Function to convert string to lowercase
+std::string toLower(std::string str) {
+    std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+    return str;
+}
+
+// Function to process user input
+void processInput(const std::string& input) {
+    std::string lowerInput = toLower(input);
+
+    // Sample responses
+    if (lowerInput.find("hello") != std::string::npos) {
+        std::cout << "Hello there!" << std::endl;
+    } else if (lowerInput.find("how are you") != std::string::npos) {
+        std::cout << "I'm doing well, thank you!" << std::endl;
+    } else if (lowerInput.find("exit") != std::string::npos) {
+        std::cout << "Goodbye!" << std::endl;
+    } else {
+        std::cout << "Sorry, I didn't understand that." << std::endl;
+    }
+}
+
+int main() {
+    std::string input;
+
+    // Main loop to get user input and process it
+    while (true) {
+        std::cout << "You: ";
+        std::getline(std::cin, input);
+
+        // Convert input to lowercase for easier comparison
+        std::string lowerInput = toLower(input);
+
+        // Process user input
+        processInput(lowerInput);
+
+        // Exit condition
+        if (lowerInput == "exit") {
+            break;
+        }
+    }
+
+    return 0;
+}
