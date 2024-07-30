@@ -83,3 +83,393 @@ class Snake(Tk):
 if __name__ == "__main__":
     snake_game = Snake(className="luxmi Game")
     snake_game.mainloop()
+
+
+//-----------------------------------------------------------------------------------------------portfolio
+<!DOCTYPE html>
+<html>
+<head>
+<title>Luxmi Chauhan's Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {width: 120px;background: #222;}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {margin-left: 120px}
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+
+/* Flexbox for Projects section */
+.projects-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.project-item {
+  width: 23%;
+  margin-bottom: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  border: 1px solid #444;
+  background-color: #333;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.project-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.project-item h3, .project-item p, .project-item a {
+  color: #fff;
+}
+
+.project-item a {
+  display: inline-block;
+  margin-top: 8px;
+}
+
+@media (max-width: 800px) {
+  .project-item {
+    width: 48%;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-item {
+    width: 100%;
+  }
+}
+
+/* Fixed Header Styling */
+.fixed-header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.fixed-header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.fixed-header p {
+  font-size: 18px;
+  margin: 0;
+}
+</style>
+</head>
+<body class="w3-black">
+
+<!-- Fixed Header -->
+<div class="fixed-header">
+  
+  
+</div>
+
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <!-- Avatar image in top left corner -->
+  <img src="c:\Users\aarti\Downloads\Luxmi pic .png" style="width:100%">
+  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+  <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>ABOUT</p>
+  </a>
+  <a href="#skills" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-cogs w3-xxlarge"></i>
+    <p>SKILLS</p>
+  </a>
+  <a href="#projects" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-code w3-xxlarge"></i>
+    <p>PROJECTS</p>
+  </a>
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>CONTACT</p>
+  </a>
+</nav>
+
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="#" class="w3-bar-item w3-button" style="width:33.3% !important">HOME</a>
+    <a href="#about" class="w3-bar-item w3-button" style="width:33.3% !important">ABOUT</a>
+    <a href="#skills" class="w3-bar-item w3-button" style="width:33.3% !important">SKILLS</a>
+    <a href="#projects" class="w3-bar-item w3-button" style="width:33.3% !important">PROJECTS</a>
+    <a href="#contact" class="w3-bar-item w3-button" style="width:33.3% !important">CONTACT</a>
+  </div>
+</div>
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+ <!-- Header/Home -->
+<header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+    <h1 class="w3-xxxlarge"><span class="w3-hide-small" style="font-size: 24px;">Hi There!👋🏻 I'M</span><br><span style="font-weight: bold; font-size: 48px;">LUXMI CHAUHAN</span></h1>
+    <p><span style="font-weight: bold;font-size: 40px;"> I'm a </p>
+        <p><span style="font-weight: bold; font-size: 40px;"> Software Developer | Frontend Developer 
+            <p><span style="font-weight: bold; font-size: 40px;"> Web Developer </span></p>
+  </header>
+
+
+
+   <!-- Download CV Section -->
+   <div class="w3-section w3-center">
+    <a href="c:\Users\aarti\Downloads\Luxmi_CV.pdf" download class="cv-button">
+      <i class="fa fa-download"></i> DOWNLOAD CV
+    </a>
+  </div>
+  <!-- End Download CV Section -->
+ 
+  
+  
+
+   <!-- About Section -->
+<div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+    <h2 class="w3-text-light-grey">ABOUT ME</h2>
+    <hr style="width:200px" class="w3-opacity">
+    <p>
+      Hi Everyone, I am Luxmi Chauhan from Faridabad, India. I am a undergrad pursuing Computing in Echelon Institute of Technology.
+      I'm an ambitious, enthusiastic, skilled, and consistent person. I have almost 1 years of experience in development. I have worked on Software development, web, and desktop technologies. My area of expertise includes Artificial Intelligence, Neural Networks and Natural Language Processing. Currently exploring Augmented Reality and Virtual Reality. I am working as a Google Developer Student Clubs Technical Lead, Freelance FullStack Developer and GitHub Developer Program Member. I'm an ambitious, enthusiastic, skilled, and consistent person. I have almost 1 years of experience.
+  
+      <p>I fell in love with programming and I have at least learnt something, I think… 🤷‍♂️
+      I am fluent in classics like Java, Javascript and Python. My field of Interest's are building new Web Technologies and Products and also in areas related to Machine learning and Data Mining.
+      Whenever possible, I also apply my passion for developing products with Node.js and Modern Javascript Library and Frameworks like React.js.
+    </p>
+    <!-- End About Section -->
+  
+  </div>
+  
+
+  <!-- Skills Section -->
+  <div class="w3-padding-64 w3-content w3-text-grey" id="skills">
+    <h2 class="w3-text-light-grey">My Skills</h2>
+    <hr style="width:200px" class="w3-opacity">
+    
+    <!-- Skill Set 1 -->
+    <div class="w3-row-padding" style="margin:32px 0">
+      <div class="w3-col l4 m6 w3-margin-bottom">
+        <h3>Java</h3>
+        <div class="w3-grey">
+          <div class="w3-container w3-dark-grey w3-center" style="width:90%">90%</div>
+        </div>
+      </div>
+      <div class="w3-col l4 m6 w3-margin-bottom">
+        <h3>Python</h3>
+        <div class="w3-grey">
+          <div class="w3-container w3-dark-grey w3-center" style="width:85%">85%</div>
+        </div>
+      </div>
+      <div class="w3-col l4 m6 w3-margin-bottom">
+        <h3>JavaScript</h3>
+        <div class="w3-grey">
+          <div class="w3-container w3-dark-grey w3-center" style="width:80%">60%</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Skill Set 2 -->
+    <div class="w3-row-padding" style="margin:32px 0">
+      <div class="w3-col l4 m6 w3-margin-bottom">
+        <h3>C</h3>
+        <div class="w3-grey">
+          <div class="w3-container w3-dark-grey w3-center" style="width:85%">90%</div>
+        </div>
+      </div>
+      <div class="w3-col l4 m6 w3-margin-bottom">
+        <h3>C++</h3>
+        <div class="w3-grey">
+          <div class="w3-container w3-dark-grey w3-center" style="width:80%">90%</div>
+        </div>
+      </div>
+      <div class="w3-col l4 m6 w3-margin-bottom">
+        <h3>HTML</h3>
+        <div class="w3-grey">
+          <div class="w3-container w3-dark-grey w3-center" style="width:90%">90%</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Skill Set 3 -->
+    <div class="w3-row-padding" style="margin:32px 0">
+      <div class="w3-col l4 m6 w3-margin-bottom">
+        <h3>CSS</h3>
+        <div class="w3-grey">
+          <div class="w3-container w3-dark-grey w3-center" style="width:85%">85%</div>
+        </div>
+      </div>
+      <div class="w3-col l4 m6 w3-margin-bottom">
+        <h3>React.js</h3>
+        <div class="w3-grey">
+          <div class="w3-container w3-dark-grey w3-center" style="width:75%">65%</div>
+        </div>
+      </div>
+      <div class="w3-col l4 m6 w3-margin-bottom">
+        <h3>Git</h3>
+        <div class="w3-grey">
+          <div class="w3-container w3-dark-grey w3-center" style="width:80%">70%</div>
+        </div>
+      </div>
+    </div>
+  <!-- End Skills Section -->
+  </div>
+
+  <!-- Projects Section -->
+  <div class="w3-padding-64 w3-content" id="projects">
+    <h2 class="w3-text-light-grey">My Projects</h2>
+    <hr style="width:200px" class="w3-opacity">
+    
+    <!-- Projects Container -->
+    <div class="projects-container">
+      <!-- Project 1 -->
+      <div class="project-item">
+        <img src="c:\Users\aarti\Downloads\What-Is-A-Shop-Management-_-Blog-Main-Thumbnail-1-min.avif" alt="Project 1">
+        <h3>Shop Management System</h3>
+        <p>A system to manage shop operations.</p>
+        <a href="https://github.com/Luxmichauhan/Lux/blob/main/shop%20management.cpp">View Project</a>
+      </div>
+      
+      <!-- Project 2 -->
+      <div class="project-item">
+        <img src="c:\Users\aarti\Downloads\images.png" alt="Project 2">
+        <h3>Voice Assistant in Python</h3>
+        <p>An AI-based voice assistant developed in Python.</p>
+        <a href="https://github.com/Luxmichauhan/Lux/blob/main/voice%20assistant%20in%20python">View Project</a>
+      </div>
+      
+      <!-- Project 3 -->
+      <div class="project-item">
+        <img src="c:\Users\aarti\Downloads\Bus-Reservation-System-in-cpp.webp" alt="Project 3">
+        <h3>Bus Reservation System in C++</h3>
+        <p>A system to manage bus reservations using C++.</p>
+        <a href="https://github.com/Luxmichauhan/Lux/blob/main/bus%20reservation%20on%20c.cpp">View Project</a>
+      </div>
+      
+      <!-- Project 4 -->
+      <div class="project-item">
+        <img src="c:\Users\aarti\Downloads\images (1).png" alt="Project 4">
+        <h3>Calculator with C++</h3>
+        <p>A simple calculator implemented in C++.</p>
+        <a href="https://github.com/Luxmichauhan/Lux/blob/main/calculator%20simple%20c.cpp">View Project</a>
+      </div>
+      
+      <!-- Project 5 -->
+      <div class="project-item">
+        <img src="c:\Users\aarti\Downloads\images.jpeg" alt="Project 5">
+        <h3>Hotel Management System</h3>
+        <p>A system for managing hotel operations.</p>
+        <a href="https://github.com/Luxmichauhan/Lux/blob/main/hotel%20management.cpp">View Project</a>
+      </div>
+      
+      <!-- Project 6 -->
+      <div class="project-item">
+        <img src="c:\Users\aarti\Downloads\d07c1db617a36898b5e8c71013d228d11003eb36d7150b7abfe988fe097c7d66.avif" alt="Project 6">
+        <h3>Tic Tac Toe Game</h3>
+        <p>A classic tic tac toe game developed.</p>
+        <a href="https://github.com/Luxmichauhan/Lux/blob/main/tic%20tac%20toe%20project.cpp">View Project</a>
+      </div>
+      
+      <!-- Project 7 -->
+      <div class="project-item">
+        <img src="c:\Users\aarti\Downloads\download.jpeg" alt="Project 7">
+        <h3>Snake Game with Python</h3>
+        <p>A simple snake game developed in c++/python.</p>
+        <a href="https://github.com/Luxmichauhan/Lux/blob/main/snake%20game.cpp">View Project</a>
+      </div>
+      
+      <!-- Project 8 -->
+      <div class="project-item">
+        <img src="c:\Users\aarti\Downloads\download (1).jpeg" alt="Project 8">
+        <h3>Registration Form with Java</h3>
+        <p>A basic registration form created using Java.</p>
+        <a href="https://github.com/Luxmichauhan/Lux/blob/main/Registration%20form%20with%20java">View Project</a>
+      </div>
+    </div>
+  <!-- End Projects Section -->
+  </div>
+
+ <!-- Contact Section -->
+ <div class="w3-padding-64 w3-content w3-text-grey" id="contact">
+    <h2 class="w3-text-light-grey">Contact Me</h2>
+    <hr style="width:200px" class="w3-opacity">
+    
+    <div class="w3-section">
+      <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Email: luxmichauhan.911@gmail.com</p>
+    </div>
+    
+    <div class="w3-section">
+      <p><i class="fa fa-linkedin fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> LinkedIn: https://www.linkedin.com/in/luxmi-chauhan-943661282/</p>
+    </div>
+
+    <div class="w3-section">
+      <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: +919310677645</p>
+    </div>
+    
+    <!-- Contact Form -->
+    <form
+    action="https://formspree.io/f/xeojeonv"
+    method="POST"
+        
+      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="email" placeholder="Email" required name="Email"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Phone" required name="Phone"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Subject" required name="Subject"></p>
+      <p><textarea class="w3-input w3-padding-16 w3-border" placeholder="Message" required name="Message"></textarea></p>
+      <p>
+        <button class="w3-button w3-light-grey w3-padding-large" type="submit">
+          <i class="fa fa-paper-plane"></i> SEND MESSAGE
+        </button>
+      </p>
+    </form>
+  </div>
+
+
+
+
+
+
+<!-- Footer -->
+<footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+    <a href="https://www.linkedin.com/in/luxmi-chauhan-943661282/" target="_blank"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
+    
+    <a href="https://leetcode.com/u/Luxmichauhan/" target="_blank"><img src="https://leetcode.com/favicon.ico" alt="LeetCode" style="width:24px;height:24px;" class="w3-hover-opacity"></a>
+    <a href="https://github.com/Luxmichauhan" target="_blank"><i class="fa fa-github w3-hover-opacity"></i></a>
+    
+  </footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
