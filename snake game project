@@ -1,107 +1,133 @@
 from tkinter import *
-import random, time
-
+import random
 
 class Snake(Tk):
-    def __init__(self, *arge, **kwargs):
-        Tk.__init__(self, *arge, **kwargs)
-        self.initialSetup()
+    def __init__(self, *args, **kwargs):
+        Tk.__init__(self, *args, **kwargs)
+        self.title("Snake Game")
+        self.geometry("520x550")
+        self.config(bg="#2f4f4f")  # Dark background for the window
+        self.initial_setup()
 
-    def initialSetup(self):
-        self.base = Canvas(self, width=500, height=500)
+    def initial_setup(self):
+        # Set up the base canvas for the game
+        self.base = Canvas(self, width=500, height=500, bg="#191970")
         self.base.pack(padx=10, pady=10)
+        
+        # Create the snake as a rectangle
         self.snake = self.base.create_rectangle(1, 1, 21, 21, fill="DodgerBlue2")
+        
+        # Score label styling
         self.score = 0
-        self.scoreDisplay = Label(self, text="Score:{}".format(self.score), font=('arial', 20, 'bold'))
-        self.scoreDisplay.pack(anchor='n')
+        self.score_display = Label(self, text="Score: {}".format(self.score), font=('arial', 20, 'bold'), fg="white", bg="#2f4f4f")
+        self.score_display.pack(anchor='n')
+
+        # Set initial snake length, direction, and position
         self.length = 3
         self.target = None
-        self.gameStatus = 1
+        self.game_status = 1
         self.x = 20
         self.y = 0
-        self.bodycoords = [(0, 0)]
-        self.bind('<Any-KeyPress>', self.linkKeys)
-        return
+        self.body_coords = [(0, 0)]
+
+        # Add a Restart button
+        self.restart_button = Button(self, text="Restart", font=('arial', 12, 'bold'), command=self.restart_game, state=DISABLED)
+        self.restart_button.pack(pady=10)
+        
+        self.bind('<Any-KeyPress>', self.link_keys)
+        self.manage()
+
+    def restart_game(self):
+        """Reset the game to its initial state."""
+        # Reset variables
+        self.score = 0
+        self.score_display.config(text="Score: {}".format(self.score))
+        self.length = 3
+        self.body_coords = [(0, 0)]
+        self.x = 20
+        self.y = 0
+        self.game_status = 1
+        
+        # Clear the canvas and set up the snake and food
+        self.base.delete("all")
+        self.snake = self.base.create_rectangle(1, 1, 21, 21, fill="DodgerBlue2")
+        self.target = None
+        
+        # Reset the restart button
+        self.restart_button.config(state=DISABLED)
+        
+        # Start the game again
+        self.manage()
 
     def check_snake_coords(self):
+        """Check if the snake goes out of bounds."""
         self.base.move(self.snake, self.x, self.y)
         i, j, ii, jj = self.base.coords(self.snake)
         if i <= 0 or j <= 0 or ii >= 500 or jj >= 500:
             self.x = 0
             self.y = 0
-            # gameover
-            self.base.create_text(220, 220, text="GAME OVER", font=('arial', 40, 'bold'), fill='red')
-            self.gameStatus = 0
-        return
+            self.base.create_text(250, 250, text="GAME OVER", font=('arial', 40, 'bold'), fill='red')
+            self.game_status = 0
+            self.restart_button.config(state=NORMAL)  # Enable the restart button
 
     def move_snake(self):
+        """Move the snake based on its current direction."""
         i, j, ii, jj = self.base.coords(self.snake)
         ii = (ii - ((ii - i) / 2))
         jj = (jj - ((jj - j) / 2))
-        self.bodycoords.append((ii, jj))
+        self.body_coords.append((ii, jj))
         self.base.delete('snakebody')
-        if len(self.bodycoords) >= self.length:
-            self.bodycoords = self.bodycoords[-self.length:]
-        self.base.create_line(tuple(self.bodycoords), tag='snakebody', width=20, fill="DodgerBlue2")
-        return
+        
+        # Ensure the snake moves smoothly and maintains a solid form
+        if len(self.body_coords) >= self.length:
+            self.body_coords = self.body_coords[-self.length:]
+        
+        self.base.create_line(self.body_coords, tag='snakebody', width=20, fill="DodgerBlue2", smooth=True)
 
     def food(self):
-        if self.target == None:
+        """Create food at a random position and check if snake eats it."""
+        if self.target is None:
             a = random.randint(20, 480)
             b = random.randint(20, 480)
-            self.target = self.base.create_oval(a, b, a + 20, b + 20, fill='red', tag='food')
-            # print(self.base.coords(self.target))
+            self.target = self.base.create_oval(a, b, a + 20, b + 20, fill='dark red', tag='food')
         if self.target:
-            # print(self.base.coords(self.target))
             i, j, ii, jj = self.base.coords(self.target)
-            # time.sleep(0.1)
             if len(self.base.find_overlapping(i, j, ii, jj)) != 1:
                 self.base.delete("food")
                 self.target = None
-                self.updateScore()
+                self.update_score()
                 self.length += 1
-            return
 
-    def updateScore(self):
+    def update_score(self):
+        """Update and display the score."""
         self.score += 1
-        self.scoreDisplay['text'] = "Score : {}".format(self.score)
-        return
+        self.score_display.config(text="Score: {}".format(self.score))
 
-    def linkKeys(self, event=None):
-        pressedkey = event.keysym
-        if pressedkey == 'Left':
+    def link_keys(self, event=None):
+        """Link keys for controlling snake movement."""
+        pressed_key = event.keysym
+        if pressed_key == 'Left' and self.x == 0:
             self.x = -20
             self.y = 0
-
-        elif pressedkey == 'Up':
+        elif pressed_key == 'Up' and self.y == 0:
             self.x = 0
             self.y = -20
-
-        elif pressedkey == 'Right':
+        elif pressed_key == 'Right' and self.x == 0:
             self.x = 20
             self.y = 0
-
-        elif pressedkey == 'Down':
+        elif pressed_key == 'Down' and self.y == 0:
             self.x = 0
             self.y = 20
 
-        else:
-            pass
-        return
-
     def manage(self):
-        if (self.gameStatus == 0):
-            return
-        self.check_snake_coords()
-        self.move_snake()
-        self.food()
+        """Control the game flow, including snake movement, food, and game over."""
+        if self.game_status == 1:
+            self.check_snake_coords()
+            self.move_snake()
+            self.food()
+            self.after(100, self.manage)  # Schedule the next call to manage
 
-        return
+if __name__ == "__main__":
+    snake_game = Snake(className="Snake Game")
+    snake_game.mainloop()
 
-
-snakeobj = Snake(className="Luxmi project Snake Game")
-while True:
-    snakeobj.update()
-    snakeobj.update_idletasks()
-    snakeobj.manage()
-    time.sleep(0.4)
