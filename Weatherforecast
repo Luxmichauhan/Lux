@@ -1,0 +1,123 @@
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import javax.swing.*;
+import org.json.JSONObject;
+
+public class WeatherForecasting {
+
+    private static final String API_KEY = "73474932f504df28fa135c1c3bfeed77";
+    private static final String ICON_BASE_URL = "http://openweathermap.org/img/wn/";
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Weather Forecast");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            // Set JFrame to full screen
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            GraphicsDevice gd = ge.getDefaultScreenDevice();
+            if (gd.isFullScreenSupported()) {
+                gd.setFullScreenWindow(frame);
+            } else {
+                frame.setSize(1920, 1080); // Set a large default size if full-screen is not supported
+                frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            }
+
+            // Create a main panel with a gradient background
+            JPanel mainPanel = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    Graphics2D g2d = (Graphics2D) g;
+                    GradientPaint gp = new GradientPaint(0, 0, Color.CYAN, 0, getHeight(), Color.MAGENTA);
+                    g2d.setPaint(gp);
+                    g2d.fillRect(0, 0, getWidth(), getHeight());
+                }
+            };
+            mainPanel.setLayout(new BorderLayout());
+            frame.add(mainPanel);
+
+            // Create a panel for input and buttons
+            JPanel inputPanel = new JPanel();
+            inputPanel.setLayout(new GridLayout(2, 1));
+            inputPanel.setOpaque(false); // Make the input panel transparent
+            mainPanel.add(inputPanel, BorderLayout.NORTH);
+
+            JTextField cityField = new JTextField();
+            inputPanel.add(new JLabel("Enter city name:"));
+            inputPanel.add(cityField);
+
+            // Panel for displaying weather information and icon
+            JPanel weatherPanel = new JPanel();
+            weatherPanel.setLayout(new BorderLayout());
+            weatherPanel.setOpaque(false); // Make the weather panel transparent
+
+            JTextArea weatherArea = new JTextArea();
+            weatherArea.setEditable(false);
+            weatherArea.setLineWrap(true);
+            weatherArea.setWrapStyleWord(true);
+            weatherArea.setFont(new Font("Arial", Font.PLAIN, 18));
+            JScrollPane scrollPane = new JScrollPane(weatherArea);
+            weatherPanel.add(scrollPane, BorderLayout.CENTER);
+
+            JLabel weatherIconLabel = new JLabel();
+            weatherIconLabel.setHorizontalAlignment(JLabel.CENTER);
+            weatherPanel.add(weatherIconLabel, BorderLayout.WEST);
+
+            mainPanel.add(weatherPanel, BorderLayout.CENTER);
+
+            JButton fetchButton = new JButton("Fetch Weather");
+            fetchButton.setFont(new Font("Arial", Font.BOLD, 18));
+            mainPanel.add(fetchButton, BorderLayout.SOUTH);
+
+            frame.setVisible(true);
+
+            fetchButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String city = cityField.getText().trim();
+                    try {
+                        JSONObject weatherData = fetchWeatherData(city);
+                        String weatherDescription = weatherData.getJSONArray("weather").getJSONObject(0).getString("description");
+                        String iconCode = weatherData.getJSONArray("weather").getJSONObject(0).getString("icon");
+                        String iconUrl = ICON_BASE_URL + iconCode + "@2x.png";
+                        double temperature = weatherData.getJSONObject("main").getDouble("temp");
+
+                        weatherArea.setText(String.format("Weather forecast for %s:\nTemperature: %.1f°C\nDescription: %s",
+                                city, temperature, weatherDescription));
+                        weatherIconLabel.setIcon(new ImageIcon(new URL(iconUrl)));
+
+                    } catch (IOException ex) {
+                        weatherArea.setText("Error: " + ex.getMessage());
+                    }
+                }
+            });
+        });
+    }
+
+    private static JSONObject fetchWeatherData(String city) throws IOException {
+        String encodedCity = URLEncoder.encode(city, "UTF-8");
+        String apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + encodedCity + "&appid=" + API_KEY + "&units=metric";
+
+        StringBuilder response = new StringBuilder();
+        URL url = new URL(apiUrl);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+            String line;
+            while ((line = in.readLine()) != null) {
+                response.append(line);
+            }
+        }
+
+        return new JSONObject(response.toString());
+    }
+}
